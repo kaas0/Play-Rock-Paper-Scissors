@@ -83,5 +83,5 @@ function getsWinner() {
         alert("You lost!Better luck next time")
     }
 }
-
+getsPlayerName()
 getsWinner()

@@ -1,3 +1,7 @@
+//Global Scope//
+humanScore = 0;
+computerScore = 0;
+
 
 /* Ask for a valid player name, and the uses the name to welcome the guest*/
 function getsPlayerName() {
@@ -71,17 +75,40 @@ function checksPlayerChoice() {
 }
 
 function getsWinner() {
-    let computerChoice = convertsRandomToChoice().toLowerCase();
-    console.log(computerChoice);
-    let playerChoice = checksPlayerChoice();
-    console.log(playerChoice);
-    if ( playerChoice === "rock" && computerChoice === "scissors" || playerChoice === "paper" && computerChoice === "rock" || playerChoice === "scissors" && computerChoice === "paper"){
-        alert("You are the winner") 
-    }else if (playerChoice === "rock" && computerChoice === "rock" || playerChoice === "paper" && computerChoice === "paper" || playerChoice === "scissors" && computerChoice === "scissors"){
-        alert("It's a tie!")
-    }else {
-        alert("You lost!Better luck next time")
+    
+    let playerScore = 0;
+    let machineScore = 0;
+
+   
+    do {
+        let computerChoice = convertsRandomToChoice().toLowerCase();
+        console.log(`Computer choice: ${computerChoice}`);
+        
+        let playerChoice = checksPlayerChoice();
+        console.log(`Player choice: ${playerChoice}`);
+
+        // Compare choices to determine the winner
+        if (
+            (playerChoice === "rock" && computerChoice === "scissors") ||
+            (playerChoice === "paper" && computerChoice === "rock") ||
+            (playerChoice === "scissors" && computerChoice === "paper")
+        ) {
+            playerScore += 1;
+            alert("You are the winner of this round!");
+        } else if (playerChoice === computerChoice) {
+            alert("It's a tie this round!");
+        } else {
+            machineScore += 1;
+            alert("You lost this round! Better luck next time.");
+        }
+
+        
+        alert(`Current Scores:\nPlayer: ${playerScore}\nMachine: ${machineScore}`);
+    } while (playerScore < 5 && machineScore < 5);
+    if (playerScore === 5) {
+        alert("Congratulations! You are the overall winner!");
+    } else {
+        alert("The machine wins this time. Better luck next game!");
     }
 }
-getsPlayerName()
 getsWinner()
